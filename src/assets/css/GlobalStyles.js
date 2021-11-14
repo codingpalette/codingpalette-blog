@@ -143,4 +143,20 @@ export const GlobalStyle = css`
     margin: 0;
     padding: 0;
   }
+
+  a {
+    text-decoration: none;
+  }
+
+  html {
+    font-size: 14px;
+    font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  }
+
+  @font-face {
+    font-family: 'ONE-Mobile-POP';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 `
