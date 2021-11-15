@@ -1,9 +1,10 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { HeaderBox } from './styles'
 import Button from '../Button'
 
 const Header = () => {
+  const navigate = useNavigate()
   return (
     <>
       <HeaderBox>
@@ -13,7 +14,7 @@ const Header = () => {
         <div className="nav_box">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
-          <Button>로그인</Button>
+          <Button onClick={() => navigate('/login')}>로그인</Button>
         </div>
       </HeaderBox>
     </>
