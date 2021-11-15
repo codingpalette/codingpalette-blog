@@ -149,7 +149,7 @@ export const GlobalStyle = css`
   }
 
   html {
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   }
 
