@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom'
 import AuthContainer from '../../containers/AuthContainer'
 import { CardBox } from '../../components/Card/styles'
 
+import firebase from '../../firebase'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+
+const auth = getAuth()
 const LoginPage = () => {
   const navigate = useNavigate()
   const [id, onChangeId] = useInput('')
@@ -18,6 +22,12 @@ const LoginPage = () => {
       console.log(id)
       console.log(password)
       console.log('1231')
+      try {
+        const data = signInWithEmailAndPassword(auth, id, password)
+        console.log(data)
+      } catch (e) {
+        console.error(e)
+      }
     },
     [id, password],
   )

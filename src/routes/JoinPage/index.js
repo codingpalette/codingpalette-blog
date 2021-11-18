@@ -7,19 +7,29 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import useInput from '../../hooks/useInput'
+import firebase from '../../firebase'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 
+const auth = getAuth()
 const JoinPage = () => {
   const navigate = useNavigate()
   const [id, onChangeId] = useInput('')
   const [nickname, onChangeNickname] = useInput('')
   const [password, onChangePassword] = useInput('')
   const [passwordCheck, onChangePasswordCheck] = useInput('')
+
   const onSubmit = useCallback(
-    e => {
+    async e => {
       e.preventDefault()
       console.log(id)
       console.log(password)
       console.log('1231')
+      try {
+        const data = await createUserWithEmailAndPassword(auth, id, password)
+        console.log(data)
+      } catch (e) {
+        console.error(e)
+      }
     },
     [id, password],
   )
