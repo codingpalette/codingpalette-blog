@@ -15,29 +15,21 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useRecoilState(authState)
   useEffect(() => {
     onAuthStateChanged(auth, user => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log('로그인 상태')
-        console.log(user)
-        setLoggedInUser({ userEmail: user.email })
-        // ...
-      } else {
-        console.log('로그아웃 상태')
-        setLoggedInUser(null)
-        // User is signed out
-        // ...
-      }
+      setLoggedInUser({ userEmail: user?.email || '' })
     })
   }, [])
   return (
     <>
-      <Routes>
-        <Route index path="/" element={<MainPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/join" element={<JoinPage />} />
-        <Route path="/about" element={<AboutPage />} />
-      </Routes>
+      {loggedInUser && (
+        <>
+          <Routes>
+            <Route index path="/" element={<MainPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/join" element={<JoinPage />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </>
+      )}
     </>
   )
 }

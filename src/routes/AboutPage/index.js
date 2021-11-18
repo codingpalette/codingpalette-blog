@@ -4,7 +4,6 @@ import authState from '../../store/authState'
 
 const AboutPage = () => {
   const userData = useRecoilValue(authState)
-  console.log(userData)
   return (
     <>
       {userData ? (
