@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { HeaderBox } from './styles'
 import Button from '../Button'
@@ -12,9 +12,10 @@ const auth = getAuth()
 const Header = () => {
   const userData = useRecoilValue(authState)
   const navigate = useNavigate()
+  const [isActive, setIsActive] = useState(false)
 
   const onClickMenuToggle = () => {
-    console.log('1111')
+    setIsActive(!isActive)
   }
 
   return (
@@ -23,12 +24,12 @@ const Header = () => {
         <div className="logo_box">
           <Link to="/">CodingPalette</Link>
         </div>
-        <div className="menu_box" onClick={onClickMenuToggle}>
+        <div className={`${isActive ? 'active' : ''} menu_box`} onClick={onClickMenuToggle}>
           <span className="bar bar1" />
           <span className="bar bar2" />
           <span className="bar bar3" />
         </div>
-        <div className="nav_box">
+        <div className={`${isActive ? 'active' : ''} nav_box`}>
           <NavLink to="/">Home</NavLink>
           <NavLink to="/about">About</NavLink>
           {userData && userData.userEmail === '' ? (

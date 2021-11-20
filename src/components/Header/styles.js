@@ -8,6 +8,7 @@ export const HeaderBox = styled.div`
   justify-content: space-between;
   padding: 0 1rem;
   position: relative;
+  z-index: 100;
 
   .logo_box {
     font-family: 'ONE-Mobile-POP';
@@ -39,14 +40,12 @@ export const HeaderBox = styled.div`
     cursor: pointer;
     position: relative;
     display: none;
-    //right: 1rem;
-    //top: 1rem;
-    //z-index: 10;
+    z-index: 10;
 
     .bar {
       position: absolute;
       width: 100%;
-      height: 2px;
+      height: 3px;
       background-color: #000;
     }
 
@@ -72,10 +71,16 @@ export const HeaderBox = styled.div`
       display: block;
     }
 
+    .menu_box.active {
+      span {
+        background-color: #fff;
+      }
+    }
+
     .nav_box {
-      //display: none;
+      display: none;
       position: fixed;
-      right: -100%;
+      right: 0;
       top: 0;
       width: 100%;
       height: 100%;
@@ -85,6 +90,9 @@ export const HeaderBox = styled.div`
       justify-content: flex-start;
       padding: 1rem;
       box-sizing: border-box;
+      //transform: translateX(100%);
+      //transition: transform 0.3s ease-in;
+      //opacity: 0;
       a {
         color: #fff;
         margin-left: 0;
@@ -97,6 +105,11 @@ export const HeaderBox = styled.div`
         margin-left: 0;
         width: 100%;
       }
+    }
+    .nav_box.active {
+      //opacity: 1;
+      display: flex;
+      //transform: translateX(0);
     }
   }
 `
