@@ -27,11 +27,12 @@ exports.createUser = functions.auth.user().onCreate(async user => {
   const d = {
     uid,
     email,
+    nickName: email.split('@')[0],
     displayName,
     emailVerified,
     photoURL,
     disabled,
-    createdAt: dateFormat(today),
+    createdAt: today,
     level: claims.level,
     // address: {
     //   road: '',
