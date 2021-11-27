@@ -6,12 +6,11 @@ import JoinPage from './routes/JoinPage'
 import AboutPage from './routes/AboutPage'
 import AdminPage from './routes/AdminPage'
 
-import firebase from './firebase'
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { auth } from './firebase'
+import { onAuthStateChanged } from 'firebase/auth'
 import { useRecoilState } from 'recoil'
 import authState from './store/authState'
 
-const auth = getAuth()
 function App() {
   const [loggedInUser, setLoggedInUser] = useRecoilState(authState)
   useEffect(() => {

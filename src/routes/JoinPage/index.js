@@ -6,13 +6,12 @@ import Input from '../../components/Input'
 import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import useInput from '../../hooks/useInput'
-import firebase from '../../firebase'
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
 import Card from '../../components/Card'
 
-const auth = getAuth()
 const JoinPage = () => {
   const navigate = useNavigate()
   const userData = useRecoilValue(authState)

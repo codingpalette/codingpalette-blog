@@ -7,13 +7,12 @@ import useInput from '../../hooks/useInput'
 import { useNavigate } from 'react-router-dom'
 import AuthContainer from '../../containers/AuthContainer'
 
-import firebase from '../../firebase'
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
 import Card from '../../components/Card'
 
-const auth = getAuth()
 const LoginPage = () => {
   const navigate = useNavigate()
   const userData = useRecoilValue(authState)

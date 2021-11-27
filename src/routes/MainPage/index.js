@@ -4,10 +4,9 @@ import { FormBox } from './styles'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
 
-import firebase from '../../firebase'
-import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { db } from '../../firebase'
+import { collection, addDoc } from 'firebase/firestore'
 
-const db = getFirestore()
 const MainPage = () => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
@@ -22,9 +21,6 @@ const MainPage = () => {
 
   const onsubmit = async e => {
     e.preventDefault()
-    console.log('1111')
-    console.log(title)
-    console.log(content)
     try {
       const data = await addDoc(collection(db, 'contact-as'), {
         name: 'Los Angeles',
