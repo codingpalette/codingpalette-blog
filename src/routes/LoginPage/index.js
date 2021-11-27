@@ -16,18 +16,18 @@ import Card from '../../components/Card'
 const LoginPage = () => {
   const navigate = useNavigate()
   const userData = useRecoilValue(authState)
-  const [id, onChangeId] = useInput('')
+  const [email, onChangeEmail] = useInput('')
   const [password, onChangePassword] = useInput('')
   const onSubmit = useCallback(
     async e => {
       e.preventDefault()
       try {
-        await signInWithEmailAndPassword(auth, id, password)
+        await signInWithEmailAndPassword(auth, email, password)
       } catch (e) {
         console.error(e)
       }
     },
-    [id, password],
+    [email, password],
   )
 
   console.log(userData)
@@ -49,8 +49,8 @@ const LoginPage = () => {
                 <h3>LOGIN</h3>
                 <form onSubmit={onSubmit}>
                   <div className="input_group">
-                    <label htmlFor="id">아이디</label>
-                    <Input value={id} onChange={onChangeId} id="id" required />
+                    <label htmlFor="email">이메일</label>
+                    <Input value={email} onChange={onChangeEmail} id="email" required />
                   </div>
                   <div className="input_group">
                     <label htmlFor="password">비밀번호</label>
