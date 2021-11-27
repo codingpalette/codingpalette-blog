@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import Header from '../../components/Header'
 import AuthContainer from '../../containers/AuthContainer'
-import { CardBox } from '../../components/Card/styles'
 import { FormGroup } from './styles'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
@@ -11,6 +10,7 @@ import firebase from '../../firebase'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
+import Card from '../../components/Card'
 
 const auth = getAuth()
 const JoinPage = () => {
@@ -43,7 +43,7 @@ const JoinPage = () => {
     <>
       <Header />
       <AuthContainer>
-        <CardBox>
+        <Card>
           <FormGroup>
             <h3>JOIN</h3>
             <form onSubmit={onSubmit}>
@@ -79,7 +79,7 @@ const JoinPage = () => {
               </div>
             </form>
           </FormGroup>
-        </CardBox>
+        </Card>
       </AuthContainer>
     </>
   )

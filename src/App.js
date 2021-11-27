@@ -4,6 +4,7 @@ import MainPage from './routes/MainPage'
 import LoginPage from './routes/LoginPage'
 import JoinPage from './routes/JoinPage'
 import AboutPage from './routes/AboutPage'
+import AdminPage from './routes/AdminPage'
 
 import firebase from './firebase'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
@@ -27,6 +28,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/join" element={<JoinPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </>
       )}

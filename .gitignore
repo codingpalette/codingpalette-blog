@@ -28,5 +28,7 @@ firebaseConfig.js
 .firebaserc
 /firebase-data
 
+.firebase
+
 
 .env

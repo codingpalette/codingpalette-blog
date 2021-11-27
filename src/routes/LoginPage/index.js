@@ -6,12 +6,12 @@ import Button from '../../components/Button'
 import useInput from '../../hooks/useInput'
 import { useNavigate } from 'react-router-dom'
 import AuthContainer from '../../containers/AuthContainer'
-import { CardBox } from '../../components/Card/styles'
 
 import firebase from '../../firebase'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
+import Card from '../../components/Card'
 
 const auth = getAuth()
 const LoginPage = () => {
@@ -45,7 +45,7 @@ const LoginPage = () => {
         <>
           <Header />
           <AuthContainer>
-            <CardBox>
+            <Card>
               <FormGroup>
                 <h3>LOGIN</h3>
                 <form onSubmit={onSubmit}>
@@ -67,7 +67,7 @@ const LoginPage = () => {
                   </div>
                 </form>
               </FormGroup>
-            </CardBox>
+            </Card>
           </AuthContainer>
         </>
       )}

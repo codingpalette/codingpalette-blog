@@ -1,9 +1,10 @@
 import React from 'react'
+import { CardBox } from './styles'
 
 const Card = ({ children }) => {
   return (
     <>
-      <div>{children}</div>
+      <CardBox>{children}</CardBox>
     </>
   )
 }

@@ -5,7 +5,8 @@ export const CardBox = styled.div`
   padding: 1.5rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
-  width: 400px;
+  width: 100%;
+  max-width: 400px;
   position: relative;
   overflow: hidden;
   &:before {
