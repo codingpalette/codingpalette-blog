@@ -100,6 +100,11 @@ export const GlobalStyle = css`
     font-family: 'Spoqa Han Sans Neo', 'Noto Sans KR', 'sans-serif';
   }
 
+  #root {
+    width: 100%;
+    height: 100%;
+  }
+
   @font-face {
     font-family: 'ONE-Mobile-POP';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/ONE-Mobile-POP.woff') format('woff');
