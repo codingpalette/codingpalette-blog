@@ -1,9 +1,5 @@
 import styled from '@emotion/styled'
 
-export const Container = styled.div`
-  background-color: rgb(248, 249, 250);
-`
-
 export const CardListBox = styled.div`
   max-width: 1200px;
   width: 100%;

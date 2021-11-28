@@ -17,7 +17,7 @@ export const HeaderBox = styled.div`
     align-items: center;
     justify-content: space-between;
 
-    button {
+    .circle_btn {
       width: 35px;
       height: 35px;
       display: flex;
@@ -26,7 +26,7 @@ export const HeaderBox = styled.div`
       transition: 0.2s ease-in-out;
       border-radius: 50%;
     }
-    button:hover {
+    .circle_btn:hover {
       background-color: rgba(0, 0, 0, 0.04);
     }
   }
@@ -91,7 +91,9 @@ export const NabBox = styled.div`
         background-color: #ccc;
         margin: 5px 0;
       }
-      ul li a {
+      ul li a,
+      ul li button {
+        width: 100%;
         display: flex;
         align-items: center;
         color: #222;
@@ -101,7 +103,8 @@ export const NabBox = styled.div`
           margin-right: 1rem;
         }
       }
-      ul li a:hover {
+      ul li a:hover,
+      ul li button:hover {
         background-color: rgba(0, 0, 0, 0.04);
       }
     }

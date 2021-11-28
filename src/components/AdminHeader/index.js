@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { HeaderBox, NabBox } from './styles'
 import { Link } from 'react-router-dom'
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
 
 const AdminHeader = ({ title }) => {
   const [isActive, setIsActive] = useState(false)
@@ -39,7 +41,7 @@ const AdminHeader = ({ title }) => {
         <header>
           <h1>{title}</h1>
           <div className="button_box">
-            <button type="button" onClick={onClickMenuOpen}>
+            <button className="circle_btn" type="button" onClick={onClickMenuOpen}>
               <span className="material-icons-outlined">menu</span>
             </button>
           </div>
@@ -48,7 +50,7 @@ const AdminHeader = ({ title }) => {
               <div className="nav_content">
                 <nav>
                   <div className="nav_close_box">
-                    <button type="button" onClick={onClickMenuClose}>
+                    <button className="circle_btn" type="button" onClick={onClickMenuClose}>
                       <span className="material-icons">close</span>
                     </button>
                   </div>
@@ -59,6 +61,18 @@ const AdminHeader = ({ title }) => {
                         <span className="material-icons-outlined">home</span>
                         Home
                       </Link>
+                    </li>
+                    <li>
+                      <Link to="/admin/post">
+                        <span className="material-icons-outlined">description</span>
+                        Post
+                      </Link>
+                    </li>
+                    <li>
+                      <button type="button" onClick={() => signOut(auth)}>
+                        <span className="material-icons-outlined">logout</span>
+                        로그아웃
+                      </button>
                     </li>
                   </ul>
                 </nav>

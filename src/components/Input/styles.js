@@ -10,7 +10,8 @@ export const InputTag = styled.input`
   box-sizing: border-box;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   border: 1px solid rgb(209, 213, 219);
+  outline: none;
   &:focus {
-    outline: 1.5px solid #655fb0;
+    border: 1px solid #655fb0;
   }
 `

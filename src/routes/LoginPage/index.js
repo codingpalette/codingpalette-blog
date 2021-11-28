@@ -3,6 +3,7 @@ import Header from '../../components/Header'
 import { FormGroup } from './styles'
 import Input from '../../components/Input'
 import Button from '../../components/Button'
+import Card from '../../components/Card'
 import useInput from '../../hooks/useInput'
 import { useNavigate } from 'react-router-dom'
 import AuthContainer from '../../containers/AuthContainer'
@@ -11,7 +12,8 @@ import { auth } from '../../firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
-import Card from '../../components/Card'
+
+import { ErrorMessageOpen } from '../../hooks/toast'
 
 const LoginPage = () => {
   const navigate = useNavigate()
@@ -21,16 +23,25 @@ const LoginPage = () => {
   const onSubmit = useCallback(
     async e => {
       e.preventDefault()
+      if (email.trim().length === 0) {
+        ErrorMessageOpen('이메일을 입력해주세요.')
+        return
+      }
+
+      if (password.trim().length === 0) {
+        ErrorMessageOpen('비밀번호를 입력해주세요.')
+        return
+      }
+
       try {
         await signInWithEmailAndPassword(auth, email, password)
       } catch (e) {
-        console.error(e)
+        // console.error(e)
+        ErrorMessageOpen('접속정보가 틀렸습니다.')
       }
     },
     [email, password],
   )
-
-  console.log(userData)
 
   useEffect(() => {
     if (userData && userData.userEmail !== '') {
@@ -50,11 +61,11 @@ const LoginPage = () => {
                 <form onSubmit={onSubmit}>
                   <div className="input_group">
                     <label htmlFor="email">이메일</label>
-                    <Input value={email} onChange={onChangeEmail} id="email" required />
+                    <Input value={email} onChange={onChangeEmail} id="email" />
                   </div>
                   <div className="input_group">
                     <label htmlFor="password">비밀번호</label>
-                    <Input value={password} onChange={onChangePassword} id="password" type="password" required />
+                    <Input value={password} onChange={onChangePassword} id="password" type="password" />
                   </div>
                   <div className="btn_box">
                     <Button width="100%" type="submit">
