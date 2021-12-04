@@ -8,6 +8,9 @@ export const HeaderBox = styled.div`
   background-color: #fff;
   padding: 0 1rem;
   box-sizing: border-box;
+  position: sticky;
+  left: 0;
+  top: 0;
   header {
     width: 100%;
     height: 100%;
