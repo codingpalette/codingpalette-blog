@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Container } from './styles'
+import { Container, Content } from './styles'
 import { useNavigate } from 'react-router-dom'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
@@ -17,7 +17,9 @@ const AdminContainer = ({ children }) => {
     <>
       {userData && userData.userEmail !== '' && (
         <>
-          <Container>{children}</Container>
+          <Container>
+            <Content>{children}</Content>
+          </Container>
         </>
       )}
     </>

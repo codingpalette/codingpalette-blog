@@ -15,11 +15,12 @@ import { db } from '../firebase'
 import { Content, converter as contentConverter, getContents } from './content'
 
 export class Post {
-  constructor(title, createdAt, updatedAt) {}
+  constructor(title, uid, createdAt, updatedAt) {}
 
   toJSON() {
     return {
       title: this.title,
+      uid: this.uid,
       createdAt: this.createdAt || serverTimestamp(),
       updatedAt: this.updatedAt || serverTimestamp(),
     }
@@ -30,6 +31,7 @@ const converter = {
   toFirestore(model) {
     return {
       title: model.title,
+      uid: model.uid,
       createdAt: new Date(),
       updatedAt: new Date(),
     }
@@ -37,7 +39,7 @@ const converter = {
   fromFirestore(snapshot) {
     const data = snapshot.data()
     return {
-      data: data,
+      data,
     }
     // return new Post(
     //   data.title,
@@ -87,7 +89,7 @@ export const setPost = async (title, content, id) => {
 
   const batch = writeBatch(db)
   const postRef = doc(db, 'posts', id).withConverter(converter)
-  const postData = { title }
+  const postData = { title, uid: id }
 
   batch.set(postRef, postData)
 
@@ -111,8 +113,9 @@ export const getPosts = async () => {
 export const getPost = async id => {
   const ref = doc(db, 'posts', id).withConverter(converter)
   const postSnapshot = await getDoc(ref)
-  const post = postSnapshot.data()
+  const post = postSnapshot.data().data
   if (!post) throw Error('post not exists')
-  // const contentsSnapshot = await getContents(id)
+  const contentsSnapshot = await getContents(id)
+  post.content = contentsSnapshot.data().data.content
   return post
 }

@@ -6,6 +6,7 @@ import JoinPage from './routes/JoinPage'
 import AboutPage from './routes/AboutPage'
 import AdminPage from './routes/AdminPage'
 import AdminPostPage from './routes/AdminPostPage'
+import AdminPostWritePage from './routes/AdminPostWritePage'
 
 import { auth } from './firebase'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -19,7 +20,7 @@ function App() {
   const [loggedInUser, setLoggedInUser] = useRecoilState(authState)
   useEffect(() => {
     onAuthStateChanged(auth, user => {
-      console.log(user)
+      // console.log(user)
       setLoggedInUser({ userEmail: user?.email || '' })
     })
   }, [])
@@ -35,6 +36,9 @@ function App() {
             <Route path="/admin">
               <Route index element={<AdminPage />} />
               <Route path="post" element={<AdminPostPage />} />
+              <Route path="write" element={<AdminPostWritePage />}>
+                <Route path=":id" element={<AdminPostWritePage />} />
+              </Route>
             </Route>
           </Routes>
           <ToastContainer />

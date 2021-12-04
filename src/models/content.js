@@ -1,4 +1,4 @@
-import { collection, getDocs, query, orderBy } from 'firebase/firestore'
+import { collection, getDocs, query, orderBy, getDoc, doc } from 'firebase/firestore'
 
 import { db } from '../firebase'
 
@@ -20,12 +20,14 @@ export const converter = {
   },
   fromFirestore(snapshot) {
     const data = snapshot.data()
-    return new Content(data.content)
+    return {
+      data,
+    }
   },
 }
 
 export const getContents = async id => {
-  const ref = collection(db, 'posts', id, 'contents').withConverter(converter)
-  const q = query(ref, orderBy('no'))
-  return await getDocs(q)
+  const ref = doc(db, 'posts', id, 'contents', 'last').withConverter(converter)
+  // const q = query(ref, orderBy('last'))
+  return await getDoc(ref)
 }

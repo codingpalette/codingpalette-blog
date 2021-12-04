@@ -9,7 +9,12 @@ export const Container = styled.div`
   margin: 0 auto;
 `
 
+export const EditorBox = styled.div`
+  margin-top: 1rem;
+`
+
 export const ButtonBox = styled.div`
+  margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
   button + button {
