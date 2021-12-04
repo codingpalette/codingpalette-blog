@@ -8,8 +8,8 @@ export const ButtonBox = styled.button`
   height: 2rem;
   font-size: 0.875rem;
   padding: 0.5rem 1rem;
-  background: #655fb0;
-  color: white;
+  background: ${props => (props.theme === 'primary' ? '#655fb0' : props.theme === 'secondary' ? '#EF4444' : '#e9ecef')};
+  color: ${props => (props.theme === 'tertiary' ? '#495057' : '#fff')};
   border-radius: 0.25rem;
   line-height: 1;
   font-weight: 500;
