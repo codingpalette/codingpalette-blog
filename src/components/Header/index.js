@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { HeaderBox } from './styles'
 import Button from '../Button'
 
-import firebase from '../../firebase'
-import { getAuth, signOut } from 'firebase/auth'
+import { auth } from '../../firebase'
+import { signOut } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
 
-const auth = getAuth()
 const Header = () => {
   const userData = useRecoilValue(authState)
   const navigate = useNavigate()

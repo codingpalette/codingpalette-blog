@@ -15,35 +15,46 @@ import authState from './store/authState'
 
 import 'react-toastify/dist/ReactToastify.css'
 import { ToastContainer } from 'react-toastify'
+import { getUser } from './models/user'
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useRecoilState(authState)
   useEffect(() => {
     onAuthStateChanged(auth, user => {
       // console.log(user)
-      setLoggedInUser({ userEmail: user?.email || '' })
+      // console.log(user)
+      if (user) {
+        userState(user.uid)
+      } else {
+        setLoggedInUser('')
+      }
     })
   }, [])
+
+  const userState = async uid => {
+    try {
+      const res = await getUser(uid)
+      setLoggedInUser(res)
+    } catch (e) {
+      console.error(e)
+    }
+  }
   return (
     <>
-      {loggedInUser && (
-        <>
-          <Routes>
-            <Route index path="/" element={<MainPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/join" element={<JoinPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/admin">
-              <Route index element={<AdminPage />} />
-              <Route path="post" element={<AdminPostPage />} />
-              <Route path="write" element={<AdminPostWritePage />}>
-                <Route path=":id" element={<AdminPostWritePage />} />
-              </Route>
-            </Route>
-          </Routes>
-          <ToastContainer />
-        </>
-      )}
+      <Routes>
+        <Route index path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/join" element={<JoinPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/admin">
+          <Route index element={<AdminPage />} />
+          <Route path="post" element={<AdminPostPage />} />
+          <Route path="write" element={<AdminPostWritePage />}>
+            <Route path=":id" element={<AdminPostWritePage />} />
+          </Route>
+        </Route>
+      </Routes>
+      <ToastContainer />
     </>
   )
 }
