@@ -9,6 +9,29 @@ export const Container = styled.div`
   margin: 0 auto;
 `
 
+export const FormGroup = styled.div`
+  margin-bottom: 1.5rem;
+  span {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    .submit_btn {
+      margin-left: 1rem;
+    }
+  }
+`
+
+export const TagGroup = styled.div`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+`
+
 export const EditorBox = styled.div`
   margin-top: 1rem;
 `
@@ -30,6 +53,10 @@ export const PopupBox = styled.div`
   h4 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
+  }
+
+  .actions {
+    text-align: right;
   }
 
   .image_box {
@@ -60,6 +87,35 @@ export const PopupBox = styled.div`
       font-size: 80px;
       color: rgb(134, 142, 150);
       margin-bottom: 1rem;
+    }
+  }
+
+  .description_box {
+    margin-top: 1rem;
+    textarea {
+      display: block;
+      width: 100%;
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+      line-height: 1.5;
+      padding: 0.5rem;
+      box-sizing: border-box;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      border: 1px solid rgb(209, 213, 219);
+      outline: none;
+      resize: none;
+      height: 150px;
+      &:focus {
+        border: 1px solid #655fb0;
+      }
+    }
+  }
+
+  .button_box {
+    margin-top: 1rem;
+    text-align: right;
+    button + button {
+      margin-left: 1rem;
     }
   }
 `

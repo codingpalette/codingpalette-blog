@@ -5,7 +5,7 @@ export const Container = styled.div`
   padding: 0 1rem;
   box-sizing: border-box;
   width: 100%;
-  height: calc(100% - 60px);
+  min-height: calc(100% - 60px);
 `
 
 export const Content = styled.div`
@@ -13,4 +13,6 @@ export const Content = styled.div`
   margin: 0 auto;
   width: 100%;
   height: 100%;
+  padding-bottom: 50px;
+  box-sizing: border-box;
 `

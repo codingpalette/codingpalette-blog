@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import AuthContainer from '../../containers/AuthContainer'
 
 import { auth } from '../../firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth'
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
 
@@ -44,14 +44,16 @@ const LoginPage = () => {
   )
 
   useEffect(() => {
-    if (userData && userData.userEmail !== '') {
-      navigate('/')
-    }
-  }, [userData])
+    onAuthStateChanged(auth, user => {
+      if (user) {
+        navigate('/')
+      }
+    })
+  }, [])
 
   return (
     <>
-      {userData && userData.userEmail === '' && (
+      {!userData && (
         <>
           <Header />
           <AuthContainer>

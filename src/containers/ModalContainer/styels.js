@@ -30,10 +30,11 @@ export const Container = styled.div`
     z-index: 10;
     width: 100%;
     max-width: ${props => (props.maxWidth ? props.maxWidth : '100%')};
-    overflow: hidden;
+    max-height: 100%;
+    overflow: auto;
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 12px 0px;
     background-color: #fff;
-    border-radius: 0.5rem;
+    //border-radius: 0.5rem;
     ${props =>
       props.isActive
         ? css`

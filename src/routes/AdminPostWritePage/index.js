@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import AdminHeader from '../../components/AdminHeader'
 import AdminContainer from '../../containers/AdminContainer'
 import Button from '../../components/Button'
-import { ButtonBox, Container, EditorBox, PopupBox } from './styles'
+import { ButtonBox, Container, EditorBox, FormGroup, PopupBox, TagGroup } from './styles'
 import Input from '../../components/Input'
 import useInput from '../../hooks/useInput'
 import ModalContainer from '../../containers/ModalContainer'
@@ -15,13 +15,29 @@ import '@toast-ui/editor/dist/toastui-editor.css'
 import { Editor } from '@toast-ui/react-editor'
 import { setImage } from '../../models/image'
 import { fileData, resizeImage } from '../../hooks/imageResize'
+import Select from '../../components/Select'
+import { useRecoilValue } from 'recoil'
+import authState from '../../store/authState'
+import { onAuthStateChanged } from 'firebase/auth'
+import { auth } from '../../firebase'
+
+const OPTIONS = [
+  { id: 1, value: '', name: '' },
+  { id: 2, value: 'css', name: 'css' },
+  { id: 3, value: 'react', name: 'react' },
+]
 
 const AdminPostWritePage = () => {
   let navigate = useNavigate()
   let params = useParams()
+  const userData = useRecoilValue(authState)
   const [title, onChangeTitle, setTitle] = useInput('')
+  const [category, setCategory] = useState('')
+  const [tag, onChangeTag, setTag] = useInput('')
+  const [tagList, setTagList] = useState([])
   const [initialValue, setInitialValue] = useState('')
-  const [thumbnail, setThumbnail] = useState('')
+  const [thumbnail, setThumbnail] = useState(null)
+  const [description, onChangeDescription] = useInput('')
   const [isActive, setIsActive] = useState(false)
   const [pageLoading, setPageLoading] = useState(false)
   const editorRef = useRef(null)
@@ -44,6 +60,21 @@ const AdminPostWritePage = () => {
     } catch (e) {
       console.error(e)
     }
+  }
+
+  // 태그 추가
+  const onSubmitTagAdd = e => {
+    e.preventDefault()
+    const tagText = tag.trim()
+    if (!tagText) return // 공백이라면 추가하지 않음
+    if (tagList.includes(tagText)) return // 이미 존재한다면 추가하지 않음
+    setTagList([...tagList, tagText])
+    setTag('')
+  }
+
+  // 태그 삭제
+  const onClickTagRemove = e => {
+    setTagList(tagList.filter(v => v !== e))
   }
 
   const onClickModalOpen = () => {
@@ -96,6 +127,10 @@ const AdminPostWritePage = () => {
     inputRef.current.click()
   }
 
+  const onClickThumbnailRemove = () => {
+    setThumbnail(null)
+  }
+
   const onChangeFileImage = useCallback(async e => {
     if (e.target.files.length > 0) {
       const file = e.target.files
@@ -137,6 +172,8 @@ const AdminPostWritePage = () => {
   }, [])
 
   const onClickSubmit = async () => {
+    console.log(category)
+    console.log(tagList)
     if (title.trim().length === 0) {
       ErrorMessageOpen('제목을 입력해 주세요.')
       return
@@ -151,60 +188,116 @@ const AdminPostWritePage = () => {
     }
   }
 
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      if (!user) {
+        navigate('/')
+      }
+    })
+  }, [])
+
   return (
     <>
-      <AdminHeader title="포스트 작성" />
-      <AdminContainer>
-        <Container>
-          <Input value={title} onChange={onChangeTitle} placeholder="제목 입력해주세요" />
-          <EditorBox>
-            {pageLoading && (
-              <Editor
-                initialValue={initialValue}
-                previewStyle="vertical"
-                height="600px"
-                initialEditType="wysiwyg"
-                useCommandShortcut={true}
-                hooks={{
-                  addImageBlobHook: async (blob, callback) => {
-                    await uploadImage(blob, callback)
-                    // console.log(uploadedImageURL);
-                    // callback(uploadedImageURL, 'alt text');
-                    return false
-                  },
-                }}
-                ref={editorRef}
-              />
-            )}
-          </EditorBox>
-          <ButtonBox>
-            <Button theme="tertiary" onClick={() => navigate('/admin/post')}>
-              취소
-            </Button>
-            <Button onClick={onClickModalOpen}>작성하기</Button>
-          </ButtonBox>
-        </Container>
-        <ModalContainer isActive={isActive} closeEvent={onClickModalClose} maxWidth="400px">
-          <PopupBox>
-            <div className="thumbnail_box">
-              <h4>포스트 미리보기</h4>
-              <div className="image_box">
-                {thumbnail ? (
-                  <img src={thumbnail} alt="" />
-                ) : (
-                  <div className="image_upload_box">
-                    <span className="material-icons-outlined">add_photo_alternate</span>
-                    <Button width="150px" onClick={onClickThumbnailUpload}>
-                      썸네일 업로드
+      {userData && (
+        <>
+          <AdminHeader title="포스트 작성" />
+          <AdminContainer>
+            <Container>
+              <FormGroup>
+                <span>제목</span>
+                <Input value={title} onChange={onChangeTitle} placeholder="제목 입력해주세요" />
+              </FormGroup>
+              <FormGroup>
+                <span>카테고리</span>
+                <Select options={OPTIONS} defaultValue="" changeValue={setCategory} />
+              </FormGroup>
+              <FormGroup>
+                <span>태그</span>
+                <form onSubmit={onSubmitTagAdd}>
+                  <div>
+                    <Input value={tag} onChange={onChangeTag} placeholder="제목 입력해주세요" />
+                    <Button type="submit" width="70px" className="submit_btn">
+                      추가
                     </Button>
                   </div>
+                </form>
+              </FormGroup>
+              <TagGroup>
+                {tagList.length > 0 &&
+                  tagList.map((v, i) => (
+                    <Button key={v + i} type="button" onClick={() => onClickTagRemove(v)}>
+                      {v}
+                    </Button>
+                  ))}
+              </TagGroup>
+              <EditorBox>
+                {pageLoading && (
+                  <Editor
+                    initialValue={initialValue}
+                    previewStyle="vertical"
+                    height="600px"
+                    initialEditType="wysiwyg"
+                    useCommandShortcut={true}
+                    hooks={{
+                      addImageBlobHook: async (blob, callback) => {
+                        await uploadImage(blob, callback)
+                        // console.log(uploadedImageURL);
+                        // callback(uploadedImageURL, 'alt text');
+                        return false
+                      },
+                    }}
+                    ref={editorRef}
+                  />
                 )}
-              </div>
-            </div>
-            <input ref={inputRef} type="file" accept="image/*" hidden onChange={onChangeFileImage} />
-          </PopupBox>
-        </ModalContainer>
-      </AdminContainer>
+              </EditorBox>
+              <ButtonBox>
+                <Button theme="tertiary" onClick={() => navigate('/admin/post')}>
+                  취소
+                </Button>
+                <Button onClick={onClickModalOpen}>작성하기</Button>
+              </ButtonBox>
+            </Container>
+            <ModalContainer isActive={isActive} closeEvent={onClickModalClose} maxWidth="400px">
+              <PopupBox>
+                <div className="thumbnail_box">
+                  <h4>포스트 미리보기</h4>
+                  {thumbnail && (
+                    <div className="actions">
+                      <button type="button" onClick={onClickThumbnailRemove}>
+                        제거
+                      </button>
+                    </div>
+                  )}
+                  <div className="image_box">
+                    {thumbnail ? (
+                      <img src={thumbnail} alt="" />
+                    ) : (
+                      <div className="image_upload_box">
+                        <span className="material-icons-outlined">add_photo_alternate</span>
+                        <Button width="150px" onClick={onClickThumbnailUpload}>
+                          썸네일 업로드
+                        </Button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="description_box">
+                  <h4>포스트 소개</h4>
+                  <textarea value={description} onChange={onChangeDescription} />
+                </div>
+                <div className="button_box">
+                  <Button onClick={onClickModalClose} theme="tertiary">
+                    닫기
+                  </Button>
+                  <Button onClick={onClickSubmit}>작성</Button>
+                </div>
+
+                <input ref={inputRef} type="file" accept="image/*" hidden onChange={onChangeFileImage} />
+              </PopupBox>
+            </ModalContainer>
+          </AdminContainer>
+        </>
+      )}
     </>
   )
 }

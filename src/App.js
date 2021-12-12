@@ -26,7 +26,7 @@ function App() {
       if (user) {
         userState(user.uid)
       } else {
-        setLoggedInUser('')
+        setLoggedInUser(null)
       }
     })
   }, [])
@@ -44,7 +44,7 @@ function App() {
       <Routes>
         <Route index path="/" element={<MainPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/join" element={<JoinPage />} />
+        {/*<Route path="/join" element={<JoinPage />} />*/}
         <Route path="/about" element={<AboutPage />} />
         <Route path="/admin">
           <Route index element={<AdminPage />} />
