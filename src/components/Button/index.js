@@ -1,10 +1,10 @@
 import React from 'react'
 import { ButtonBox } from './styles'
 
-const Button = ({ children, onClick, width, type, theme, loading }) => {
+const Button = ({ children, onClick, width, type, theme, loading, className }) => {
   return (
     <>
-      <ButtonBox onClick={onClick} width={width} type={type} theme={theme}>
+      <ButtonBox onClick={onClick} width={width} type={type} theme={theme} className={className}>
         {children}
       </ButtonBox>
     </>
