@@ -17,6 +17,7 @@ const AdminPostPage = () => {
   const getData = async () => {
     try {
       const res = await getPosts()
+      console.log(res)
       setPostList(res)
     } catch (e) {
       console.error(e)
@@ -39,9 +40,7 @@ const AdminPostPage = () => {
             <>
               <CardContainer>
                 {postList.map((v, i) => (
-                  <PostCard key={v.uid} id={v.uid}>
-                    dfss
-                  </PostCard>
+                  <PostCard key={v.uid} id={v.uid} />
                 ))}
               </CardContainer>
             </>
