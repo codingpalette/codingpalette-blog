@@ -64,7 +64,7 @@ const contentsToChunks = str => {
   return chunks
 }
 
-export const setPost = async (title, content, id) => {
+export const setPost = async (title, category, tagList, thumbnail, description, content, createdAt, id) => {
   // if (!firebaseUser.value) throw Error('user not signed')
   // console.log('post', title)
 
@@ -82,14 +82,15 @@ export const setPost = async (title, content, id) => {
   let _name
 
   if (!id) {
+    createdAt = today
     _name = yyyy + mm + dd
     const RandomNumber = Math.random().toString(36).substr(2, 11)
     id = `post${RandomNumber}${_name}`
   }
 
   const batch = writeBatch(db)
-  const postRef = doc(db, 'posts', id).withConverter(converter)
-  const postData = { title, uid: id }
+  const postRef = doc(db, 'posts', id)
+  const postData = { title, category, tagList, thumbnail, description, createdAt, uid: id }
 
   batch.set(postRef, postData)
 

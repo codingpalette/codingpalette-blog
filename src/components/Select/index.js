@@ -9,9 +9,9 @@ const Select = ({ options, defaultValue, changeValue }) => {
 
   return (
     <>
-      <SelectBox onChange={onChangeSelect}>
+      <SelectBox onChange={onChangeSelect} value={defaultValue}>
         {options.map(v => (
-          <option key={v.id} value={v.value} defaultValue={defaultValue === v.value}>
+          <option key={v.id} value={v.value}>
             {v.name}
           </option>
         ))}
