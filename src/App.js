@@ -4,6 +4,7 @@ import MainPage from './routes/MainPage'
 import LoginPage from './routes/LoginPage'
 import JoinPage from './routes/JoinPage'
 import AboutPage from './routes/AboutPage'
+import PostPage from './routes/PostPage'
 import AdminPage from './routes/AdminPage'
 import AdminPostPage from './routes/AdminPostPage'
 import AdminPostWritePage from './routes/AdminPostWritePage'
@@ -46,6 +47,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         {/*<Route path="/join" element={<JoinPage />} />*/}
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/post/:id" element={<PostPage />} />
         <Route path="/admin">
           <Route index element={<AdminPage />} />
           <Route path="post" element={<AdminPostPage />} />
