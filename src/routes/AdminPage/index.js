@@ -14,43 +14,31 @@ const AdminPage = () => {
   const navigate = useNavigate()
   const userData = useRecoilValue(authState)
 
-  useEffect(() => {
-    onAuthStateChanged(auth, user => {
-      if (!user) {
-        navigate('/')
-      }
-    })
-  }, [])
-
   return (
     <>
-      {userData && (
-        <>
-          <AdminHeader title="Admin" />
-          <AdminContainer>
-            <CardListBox>
-              <Card>
-                <CardContent>
-                  <h3>개시판1</h3>
-                  <div className="btn_box">
-                    <Button>상세보기</Button>
-                  </div>
-                  <div className="content_list">
-                    <ul>
-                      <li>
-                        <Link to="/">테스트 질문</Link>
-                      </li>
-                      <li>
-                        <Link to="/">테스트 질문</Link>
-                      </li>
-                    </ul>
-                  </div>
-                </CardContent>
-              </Card>
-            </CardListBox>
-          </AdminContainer>
-        </>
-      )}
+      <AdminHeader title="Admin" />
+      <AdminContainer>
+        <CardListBox>
+          <Card>
+            <CardContent>
+              <h3>개시판1</h3>
+              <div className="btn_box">
+                <Button>상세보기</Button>
+              </div>
+              <div className="content_list">
+                <ul>
+                  <li>
+                    <Link to="/">테스트 질문</Link>
+                  </li>
+                  <li>
+                    <Link to="/">테스트 질문</Link>
+                  </li>
+                </ul>
+              </div>
+            </CardContent>
+          </Card>
+        </CardListBox>
+      </AdminContainer>
     </>
   )
 }

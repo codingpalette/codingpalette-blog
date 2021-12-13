@@ -9,8 +9,6 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import { adminPostState } from '../../store/postState'
 import PostCard from '../../components/PostCard'
 import CardContainer from '../../containers/CardContainer'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../../firebase'
 import authState from '../../store/authState'
 
 const AdminPostPage = () => {
@@ -32,37 +30,25 @@ const AdminPostPage = () => {
     getData()
   }, [])
 
-  useEffect(() => {
-    onAuthStateChanged(auth, user => {
-      if (!user) {
-        navigate('/')
-      }
-    })
-  }, [])
-
   return (
     <>
-      {userData && (
-        <>
-          <AdminHeader title="Post" />
-          <AdminContainer>
-            <Container>
-              <ButtonBox>
-                <Button onClick={() => navigate('/admin/write')}>포스트 작성</Button>
-              </ButtonBox>
-              {postList && postList.length > 0 && (
-                <>
-                  <CardContainer>
-                    {postList.map((v, i) => (
-                      <PostCard key={v.uid} id={v.uid} />
-                    ))}
-                  </CardContainer>
-                </>
-              )}
-            </Container>
-          </AdminContainer>
-        </>
-      )}
+      <AdminHeader title="Post" />
+      <AdminContainer>
+        <Container>
+          <ButtonBox>
+            <Button onClick={() => navigate('/admin/write')}>포스트 작성</Button>
+          </ButtonBox>
+          {postList && postList.length > 0 && (
+            <>
+              <CardContainer>
+                {postList.map((v, i) => (
+                  <PostCard key={v.uid} id={v.uid} />
+                ))}
+              </CardContainer>
+            </>
+          )}
+        </Container>
+      </AdminContainer>
     </>
   )
 }

@@ -210,116 +210,104 @@ const AdminPostWritePage = () => {
     }
   }
 
-  useEffect(() => {
-    onAuthStateChanged(auth, user => {
-      if (!user) {
-        navigate('/')
-      }
-    })
-  }, [])
-
   return (
     <>
-      {userData && (
+      {pageLoading && (
         <>
-          {pageLoading && (
-            <>
-              <AdminHeader title="포스트 작성" />
-              <AdminContainer>
-                <Container>
-                  <FormGroup>
-                    <span>제목</span>
-                    <Input value={title} onChange={onChangeTitle} placeholder="제목 입력해주세요" />
-                  </FormGroup>
-                  <FormGroup>
-                    <span>카테고리</span>
-                    <Select options={OPTIONS} defaultValue={category} changeValue={setCategory} />
-                  </FormGroup>
-                  <FormGroup>
-                    <span>태그</span>
-                    <form onSubmit={onSubmitTagAdd}>
-                      <div>
-                        <Input value={tag} onChange={onChangeTag} placeholder="제목 입력해주세요" />
-                        <Button type="submit" width="70px" className="submit_btn">
-                          추가
-                        </Button>
-                      </div>
-                    </form>
-                  </FormGroup>
-                  <TagGroup>
-                    {tagList.length > 0 &&
-                      tagList.map((v, i) => (
-                        <Button key={v + i} type="button" onClick={() => onClickTagRemove(v)}>
-                          {v}
-                        </Button>
-                      ))}
-                  </TagGroup>
-                  <EditorBox>
-                    <Editor
-                      initialValue={initialValue}
-                      previewStyle="vertical"
-                      height="600px"
-                      initialEditType="wysiwyg"
-                      useCommandShortcut={true}
-                      hooks={{
-                        addImageBlobHook: async (blob, callback) => {
-                          await uploadImage(blob, callback)
-                          // console.log(uploadedImageURL);
-                          // callback(uploadedImageURL, 'alt text');
-                          return false
-                        },
-                      }}
-                      ref={editorRef}
-                    />
-                  </EditorBox>
-                  <ButtonBox>
-                    <Button theme="tertiary" onClick={() => navigate('/admin/post')}>
-                      취소
+          <AdminHeader title="포스트 작성" />
+          <AdminContainer>
+            <Container>
+              <FormGroup>
+                <span>제목</span>
+                <Input value={title} onChange={onChangeTitle} placeholder="제목 입력해주세요" />
+              </FormGroup>
+              <FormGroup>
+                <span>카테고리</span>
+                <Select options={OPTIONS} defaultValue={category} changeValue={setCategory} />
+              </FormGroup>
+              <FormGroup>
+                <span>태그</span>
+                <form onSubmit={onSubmitTagAdd}>
+                  <div>
+                    <Input value={tag} onChange={onChangeTag} placeholder="제목 입력해주세요" />
+                    <Button type="submit" width="70px" className="submit_btn">
+                      추가
                     </Button>
-                    <Button onClick={onClickModalOpen}>작성하기</Button>
-                  </ButtonBox>
-                </Container>
-                <ModalContainer isActive={isActive} closeEvent={onClickModalClose} maxWidth="400px">
-                  <PopupBox>
-                    <div className="thumbnail_box">
-                      <h4>포스트 미리보기</h4>
-                      {thumbnail && (
-                        <div className="actions">
-                          <button type="button" onClick={onClickThumbnailRemove}>
-                            제거
-                          </button>
-                        </div>
-                      )}
-                      <div className="image_box">
-                        {thumbnail ? (
-                          <img src={thumbnail} alt="" />
-                        ) : (
-                          <div className="image_upload_box">
-                            <span className="material-icons-outlined">add_photo_alternate</span>
-                            <Button width="150px" onClick={onClickThumbnailUpload}>
-                              썸네일 업로드
-                            </Button>
-                          </div>
-                        )}
+                  </div>
+                </form>
+              </FormGroup>
+              <TagGroup>
+                {tagList.length > 0 &&
+                  tagList.map((v, i) => (
+                    <Button key={v + i} type="button" onClick={() => onClickTagRemove(v)}>
+                      {v}
+                    </Button>
+                  ))}
+              </TagGroup>
+              <EditorBox>
+                <Editor
+                  initialValue={initialValue}
+                  previewStyle="vertical"
+                  height="600px"
+                  initialEditType="wysiwyg"
+                  useCommandShortcut={true}
+                  hooks={{
+                    addImageBlobHook: async (blob, callback) => {
+                      await uploadImage(blob, callback)
+                      // console.log(uploadedImageURL);
+                      // callback(uploadedImageURL, 'alt text');
+                      return false
+                    },
+                  }}
+                  ref={editorRef}
+                />
+              </EditorBox>
+              <ButtonBox>
+                <Button theme="tertiary" onClick={() => navigate('/admin/post')}>
+                  취소
+                </Button>
+                <Button onClick={onClickModalOpen}>작성하기</Button>
+              </ButtonBox>
+            </Container>
+            <ModalContainer isActive={isActive} closeEvent={onClickModalClose} maxWidth="400px">
+              <PopupBox>
+                <div className="thumbnail_box">
+                  <h4>포스트 미리보기</h4>
+                  {thumbnail && (
+                    <div className="actions">
+                      <button type="button" onClick={onClickThumbnailRemove}>
+                        제거
+                      </button>
+                    </div>
+                  )}
+                  <div className="image_box">
+                    {thumbnail ? (
+                      <img src={thumbnail} alt="" />
+                    ) : (
+                      <div className="image_upload_box">
+                        <span className="material-icons-outlined">add_photo_alternate</span>
+                        <Button width="150px" onClick={onClickThumbnailUpload}>
+                          썸네일 업로드
+                        </Button>
                       </div>
-                    </div>
-                    <div className="description_box">
-                      <h4>포스트 소개</h4>
-                      <textarea value={description} onChange={onChangeDescription} />
-                    </div>
-                    <div className="button_box">
-                      <Button onClick={onClickModalClose} theme="tertiary">
-                        닫기
-                      </Button>
-                      <Button onClick={onClickSubmit}>작성</Button>
-                    </div>
+                    )}
+                  </div>
+                </div>
+                <div className="description_box">
+                  <h4>포스트 소개</h4>
+                  <textarea value={description} onChange={onChangeDescription} />
+                </div>
+                <div className="button_box">
+                  <Button onClick={onClickModalClose} theme="tertiary">
+                    닫기
+                  </Button>
+                  <Button onClick={onClickSubmit}>작성</Button>
+                </div>
 
-                    <input ref={inputRef} type="file" accept="image/*" hidden onChange={onChangeFileImage} />
-                  </PopupBox>
-                </ModalContainer>
-              </AdminContainer>
-            </>
-          )}
+                <input ref={inputRef} type="file" accept="image/*" hidden onChange={onChangeFileImage} />
+              </PopupBox>
+            </ModalContainer>
+          </AdminContainer>
         </>
       )}
     </>

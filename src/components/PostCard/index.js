@@ -10,13 +10,13 @@ const PostCard = ({ id }) => {
   return (
     <>
       <Container>
-        <Link to={`/admin/write/${id}`}>
+        <Link to={`/post/${id}`}>
           <div className="thumbnail">
             <img src={img} alt="" />
           </div>
         </Link>
         <div className="text_box">
-          <Link to={`/admin/write/${id}`}>
+          <Link to={`/post/${id}`}>
             <h4>카카오 입사 후기</h4>
             <div className="description_wrapper">
               <p>좌충우돌 카카오페이 최종합격 후기</p>
