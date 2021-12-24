@@ -5,9 +5,12 @@ import { useParams } from 'react-router-dom'
 import { getPost } from '../../models/post'
 import { Viewer } from '@toast-ui/react-editor'
 import { PostContainer } from './styles'
+import dayjs from 'dayjs'
 
 const PostPage = () => {
   let params = useParams()
+  const [title, setTitle] = useState('')
+  const [createdAt, setCreatedAt] = useState('')
   const [content, setContent] = useState('')
   const [pageLoading, setPageLoading] = useState(false)
 
@@ -18,7 +21,9 @@ const PostPage = () => {
   const getPostEvent = async () => {
     try {
       const res = await getPost(params.id)
-      console.log(res)
+      // console.log(res)
+      setTitle(res.title)
+      setCreatedAt(dayjs(res.createdAt.seconds * 1000).format('YYYY년 MM월 DD일'))
       setContent(res.content)
       setPageLoading(true)
     } catch (e) {
@@ -28,11 +33,14 @@ const PostPage = () => {
   return (
     <>
       <Header />
-      <MainContainer>
+      <MainContainer bgColor="white">
         {pageLoading && (
           <>
             <PostContainer>
-              <div>sf</div>
+              <h1>{title}</h1>
+              <div className="information">
+                <span>{createdAt}</span>
+              </div>
               <Viewer initialValue={content} />
             </PostContainer>
           </>
