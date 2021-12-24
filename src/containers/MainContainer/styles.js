@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const Container = styled.div`
-  background-color: rgb(248, 249, 250);
+  background-color: ${props => (props.bgColor === 'gray' ? 'rgb(248, 249, 250)' : '#fff')};
   padding: 0 1rem;
   box-sizing: border-box;
   width: 100%;

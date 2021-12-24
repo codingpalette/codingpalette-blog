@@ -1,14 +1,18 @@
 import React from 'react'
 import { Container, Content } from './styles'
 
-const MainContainer = ({ children }) => {
+const MainContainer = ({ children, bgColor }) => {
   return (
     <>
-      <Container>
+      <Container bgColor={bgColor}>
         <Content>{children}</Content>
       </Container>
     </>
   )
+}
+
+MainContainer.defaultProps = {
+  bgColor: 'gray',
 }
 
 export default MainContainer
