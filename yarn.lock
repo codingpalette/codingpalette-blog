@@ -2281,6 +2281,20 @@
   dependencies:
     "@babel/runtime" "^7.12.5"
 
+"@toast-ui/editor-plugin-code-syntax-highlight@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-code-syntax-highlight/-/editor-plugin-code-syntax-highlight-3.0.0.tgz#a82a7b75f12386280be7efdc7c6f5bf5b48744f3"
+  integrity sha512-62XB3IcFgvRxVZzj2kTeQao0xACotv/mD6jScSDkWac2V0jkCsTh0kZRG4TSW5bGdKvx4xz3YjFm7gWgw1I/Aw==
+  dependencies:
+    prismjs "^1.23.0"
+
+"@toast-ui/editor-plugin-color-syntax@^3.0.2":
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/@toast-ui/editor-plugin-color-syntax/-/editor-plugin-color-syntax-3.0.2.tgz#6fa501f5a8167da5fa603b1a769eaea918114670"
+  integrity sha512-bY356w1VSiPKEslmEyE6dNcGosa6iowEY7FDVPLXHKnZ3IFGi7duwsThnkgi84aLOONAZxu6JaJmuyv1Vari+Q==
+  dependencies:
+    tui-color-picker "^2.2.6"
+
 "@toast-ui/editor@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@toast-ui/editor/-/editor-3.1.1.tgz#c9765c28e2d2721664f3154d7da8026374fecba6"
@@ -9628,6 +9642,11 @@ pretty-format@^27.0.0, pretty-format@^27.3.1:
     ansi-styles "^5.0.0"
     react-is "^17.0.1"
 
+prismjs@^1.23.0, prismjs@^1.25.0:
+  version "1.25.0"
+  resolved "https://registry.yarnpkg.com/prismjs/-/prismjs-1.25.0.tgz#6f822df1bdad965734b310b315a23315cf999756"
+  integrity sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==
+
 process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
@@ -11584,6 +11603,11 @@ tty-browserify@0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/tty-browserify/-/tty-browserify-0.0.0.tgz#a157ba402da24e9bf957f9aa69d524eed42901a6"
   integrity sha1-oVe6QC2iTpv5V/mqadUk7tQpAaY=
+
+tui-color-picker@^2.2.6:
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/tui-color-picker/-/tui-color-picker-2.2.7.tgz#233cd501b17568ae6d604e06898b0c8553851186"
+  integrity sha512-y7gUe6PdVBq8ruZbiOkeaN7N/DX+ogVyLkK53OM4qW5Vrc4pDWYEKlnOBCsPODb4/RSzS9iTd6fXYirXxeakJA==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

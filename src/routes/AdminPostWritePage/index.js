@@ -1,25 +1,36 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
+import { ButtonBox, Container, EditorBox, FormGroup, PopupBox, TagGroup } from './styles'
 import AdminHeader from '../../components/AdminHeader'
 import AdminContainer from '../../containers/AdminContainer'
 import Button from '../../components/Button'
-import { ButtonBox, Container, EditorBox, FormGroup, PopupBox, TagGroup } from './styles'
 import Input from '../../components/Input'
 import useInput from '../../hooks/useInput'
 import ModalContainer from '../../containers/ModalContainer'
+import Select from '../../components/Select'
 
 import { ErrorMessageOpen, SuccessMessageOpen } from '../../hooks/toast'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getPost, setPost } from '../../models/post'
 
+// toast-editor
 import '@toast-ui/editor/dist/toastui-editor.css'
 import { Editor } from '@toast-ui/react-editor'
+
+// plugin
+import Prism from 'prismjs'
+import 'prismjs/themes/prism.css'
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
+
+import 'tui-color-picker/dist/tui-color-picker.css'
+import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
+import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
+
 import { setImage } from '../../models/image'
 import { fileData, resizeImage } from '../../hooks/imageResize'
-import Select from '../../components/Select'
+
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
-import { onAuthStateChanged } from 'firebase/auth'
-import { auth } from '../../firebase'
 
 const OPTIONS = [
   { id: 1, value: '', name: '' },
@@ -251,6 +262,7 @@ const AdminPostWritePage = () => {
                   height="600px"
                   initialEditType="wysiwyg"
                   useCommandShortcut={true}
+                  plugins={[colorSyntax, [codeSyntaxHighlight, { highlighter: Prism }]]}
                   hooks={{
                     addImageBlobHook: async (blob, callback) => {
                       await uploadImage(blob, callback)
