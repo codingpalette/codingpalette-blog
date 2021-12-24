@@ -11,10 +11,10 @@ export const HeaderBox = styled.div`
   z-index: 100;
 
   .logo_box {
-    font-family: 'ONE-Mobile-POP';
     a {
       color: #222;
       font-size: 16px;
+      font-family: 'ONE-Mobile-POP';
     }
   }
 

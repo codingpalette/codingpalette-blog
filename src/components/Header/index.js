@@ -29,13 +29,13 @@ const Header = () => {
           <span className="bar bar3" />
         </div>
         <div className={`${isActive ? 'active' : ''} nav_box`}>
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/about">About</NavLink>
-          {!userData ? (
-            <Button onClick={() => navigate('/login')}>로그인</Button>
-          ) : (
-            <Button onClick={() => signOut(auth)}>로그아웃</Button>
-          )}
+          {/*<NavLink to="/">Home</NavLink>*/}
+          {/*<NavLink to="/about">About</NavLink>*/}
+          {/*{!userData ? (*/}
+          {/*  <Button onClick={() => navigate('/login')}>로그인</Button>*/}
+          {/*) : (*/}
+          {/*  <Button onClick={() => signOut(auth)}>로그아웃</Button>*/}
+          {/*)}*/}
         </div>
       </HeaderBox>
     </>
