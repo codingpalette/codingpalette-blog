@@ -10,6 +10,7 @@ import {
   getDocs,
   limit,
   orderBy,
+  deleteDoc,
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import { Content, converter as contentConverter, getContents } from './content'
@@ -119,4 +120,15 @@ export const getPost = async id => {
   const contentsSnapshot = await getContents(id)
   post.content = contentsSnapshot.data().data.content
   return post
+}
+
+export const delPost = async id => {
+  const batch = writeBatch(db)
+  const postRef = doc(db, 'posts', id)
+  batch.delete(postRef)
+
+  const contentRef = doc(collection(db, 'posts', id, 'contents'), 'last').withConverter(contentConverter)
+  batch.delete(contentRef)
+  await batch.commit()
+  return true
 }

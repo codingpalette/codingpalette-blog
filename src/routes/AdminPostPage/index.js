@@ -6,7 +6,7 @@ import Button from '../../components/Button'
 import { useNavigate } from 'react-router-dom'
 import { getPosts } from '../../models/post'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { adminPostState } from '../../store/postState'
+import { postState } from '../../store/postState'
 import PostCard from '../../components/PostCard'
 import CardContainer from '../../containers/CardContainer'
 import authState from '../../store/authState'
@@ -14,7 +14,7 @@ import authState from '../../store/authState'
 const AdminPostPage = () => {
   let navigate = useNavigate()
   const userData = useRecoilValue(authState)
-  const [postList, setPostList] = useRecoilState(adminPostState)
+  const [postList, setPostList] = useRecoilState(postState)
 
   const getData = async () => {
     try {

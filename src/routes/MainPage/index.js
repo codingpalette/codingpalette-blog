@@ -1,57 +1,43 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
-import { FormBox } from './styles'
-import Input from '../../components/Input'
-import Button from '../../components/Button'
-
-import { db } from '../../firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import MainContainer from '../../containers/MainContainer'
+import { useRecoilState } from 'recoil'
+import { postState } from '../../store/postState'
+import { getPosts } from '../../models/post'
+import CardContainer from '../../containers/CardContainer'
+import PostCard from '../../components/PostCard'
 
 const MainPage = () => {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
+  const [postList, setPostList] = useRecoilState(postState)
 
-  const onChangeTitle = e => {
-    setTitle(e.target.value)
-  }
-
-  const onChangeContent = e => {
-    setContent(e.target.value)
-  }
-
-  const onsubmit = async e => {
-    e.preventDefault()
+  const getData = async () => {
     try {
-      const data = await addDoc(collection(db, 'contact-as'), {
-        name: 'Los Angeles',
-        state: 'CA',
-        country: 'USA',
-      })
+      const res = await getPosts()
+      // console.log(res)
+      setPostList(res)
     } catch (e) {
       console.error(e)
     }
   }
 
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <>
       <Header />
-      <div>MainPage</div>
-
-      <FormBox>
-        <form onSubmit={onsubmit}>
-          <div>
-            <div>제목</div>
-            <Input value={title} onChange={onChangeTitle} />
-          </div>
-          <div>
-            <div>내용</div>
-            <textarea value={content} onChange={onChangeContent} />
-          </div>
-          <div>
-            <Button type="submit">전송</Button>
-          </div>
-        </form>
-      </FormBox>
+      <MainContainer>
+        {postList && postList.length > 0 && (
+          <>
+            <CardContainer>
+              {postList.map((v, i) => (
+                <PostCard key={v.uid} id={v.uid} title={v.title} thumbnail={v.thumbnail} description={v.description} />
+              ))}
+            </CardContainer>
+          </>
+        )}
+      </MainContainer>
     </>
   )
 }

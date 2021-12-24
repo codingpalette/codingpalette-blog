@@ -89,3 +89,32 @@ export const Container = styled.div`
     }
   }
 `
+
+export const PopupBox = styled.div`
+  width: 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+
+  h4 {
+    display: block;
+    font-size: 1.15rem;
+    font-weight: bold;
+  }
+
+  .message {
+    margin: 1.5rem 0;
+    p {
+      line-height: 1.5;
+      color: rgb(73, 80, 87);
+    }
+  }
+
+  .button_box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    button {
+      margin-left: 1rem;
+    }
+  }
+`

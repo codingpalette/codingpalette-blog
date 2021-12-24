@@ -36,6 +36,7 @@ const Header = () => {
           {/*) : (*/}
           {/*  <Button onClick={() => signOut(auth)}>로그아웃</Button>*/}
           {/*)}*/}
+          {userData && <Button onClick={() => signOut(auth)}>로그아웃</Button>}
         </div>
       </HeaderBox>
     </>

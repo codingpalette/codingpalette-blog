@@ -44,7 +44,7 @@ function App() {
     <>
       <Routes>
         <Route index path="/" element={<MainPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/cp_login" element={<LoginPage />} />
         {/*<Route path="/join" element={<JoinPage />} />*/}
         <Route path="/about" element={<AboutPage />} />
         <Route path="/post/:id" element={<PostPage />} />

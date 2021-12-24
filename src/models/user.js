@@ -24,9 +24,7 @@ const converter = {
 const userCollection = collection(db, 'users').withConverter(converter)
 export const getUsers = async () => {
   const q = query(userCollection)
-  const aa = await getDocs(q)
-  console.log(aa)
-  return aa
+  return await getDocs(q)
 }
 
 export const getUser = async uid => {

@@ -3,7 +3,7 @@ import { SelectBox } from './styles'
 
 const Select = ({ options, defaultValue, changeValue }) => {
   const onChangeSelect = e => {
-    console.log(e.target.value)
+    // console.log(e.target.value)
     changeValue(e.target.value)
   }
 

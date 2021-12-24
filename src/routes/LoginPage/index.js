@@ -73,9 +73,9 @@ const LoginPage = () => {
                     <Button width="100%" type="submit">
                       로그인
                     </Button>
-                    <Button width="100%" onClick={() => navigate('/join')}>
-                      회원가입 하러 가기
-                    </Button>
+                    {/*<Button width="100%" onClick={() => navigate('/join')}>*/}
+                    {/*  회원가입 하러 가기*/}
+                    {/*</Button>*/}
                   </div>
                 </form>
               </FormGroup>
