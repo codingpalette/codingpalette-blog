@@ -66,50 +66,50 @@ export const HeaderBox = styled.div`
     }
   }
 
-  @media screen and (max-width: 768px) {
-    .menu_box {
-      display: block;
-    }
-
-    .menu_box.active {
-      span {
-        background-color: #fff;
-      }
-    }
-
-    .nav_box {
-      display: none;
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(35, 40, 58, 0.91);
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: flex-start;
-      padding: 1rem;
-      box-sizing: border-box;
-      //transform: translateX(100%);
-      //transition: transform 0.3s ease-in;
-      //opacity: 0;
-      a {
-        color: #fff;
-        margin-left: 0;
-        width: 100%;
-        text-align: center;
-        padding: 1rem;
-        box-sizing: border-box;
-      }
-      button {
-        margin-left: 0;
-        width: 100%;
-      }
-    }
-    .nav_box.active {
-      //opacity: 1;
-      display: flex;
-      //transform: translateX(0);
-    }
-  }
+  //@media screen and (max-width: 768px) {
+  //  .menu_box {
+  //    display: block;
+  //  }
+  //
+  //  .menu_box.active {
+  //    span {
+  //      background-color: #fff;
+  //    }
+  //  }
+  //
+  //  .nav_box {
+  //    display: none;
+  //    position: fixed;
+  //    right: 0;
+  //    top: 0;
+  //    width: 100%;
+  //    height: 100%;
+  //    background-color: rgba(35, 40, 58, 0.91);
+  //    flex-direction: column;
+  //    align-items: flex-start;
+  //    justify-content: flex-start;
+  //    padding: 1rem;
+  //    box-sizing: border-box;
+  //    //transform: translateX(100%);
+  //    //transition: transform 0.3s ease-in;
+  //    //opacity: 0;
+  //    a {
+  //      color: #fff;
+  //      margin-left: 0;
+  //      width: 100%;
+  //      text-align: center;
+  //      padding: 1rem;
+  //      box-sizing: border-box;
+  //    }
+  //    button {
+  //      margin-left: 0;
+  //      width: 100%;
+  //    }
+  //  }
+  //  .nav_box.active {
+  //    //opacity: 1;
+  //    display: flex;
+  //    //transform: translateX(0);
+  //  }
+  //}
 `

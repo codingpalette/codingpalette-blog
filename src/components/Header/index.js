@@ -23,11 +23,11 @@ const Header = () => {
         <div className="logo_box">
           <Link to="/">CodingPalette</Link>
         </div>
-        <div className={`${isActive ? 'active' : ''} menu_box`} onClick={onClickMenuToggle}>
-          <span className="bar bar1" />
-          <span className="bar bar2" />
-          <span className="bar bar3" />
-        </div>
+        {/*<div className={`${isActive ? 'active' : ''} menu_box`} onClick={onClickMenuToggle}>*/}
+        {/*  <span className="bar bar1" />*/}
+        {/*  <span className="bar bar2" />*/}
+        {/*  <span className="bar bar3" />*/}
+        {/*</div>*/}
         <div className={`${isActive ? 'active' : ''} nav_box`}>
           {/*<NavLink to="/">Home</NavLink>*/}
           {/*<NavLink to="/about">About</NavLink>*/}
