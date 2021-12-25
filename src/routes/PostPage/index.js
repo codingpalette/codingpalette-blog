@@ -3,9 +3,16 @@ import Header from '../../components/Header'
 import MainContainer from '../../containers/MainContainer'
 import { useParams } from 'react-router-dom'
 import { getPost } from '../../models/post'
+import '@toast-ui/editor/dist/toastui-editor.css'
 import { Viewer } from '@toast-ui/react-editor'
 import { PostContainer } from './styles'
 import dayjs from 'dayjs'
+
+// plugin
+import Prism from 'prismjs'
+import 'prismjs/themes/prism.css'
+import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
+import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
 
 const PostPage = () => {
   let params = useParams()
@@ -41,7 +48,7 @@ const PostPage = () => {
               <div className="information">
                 <span>{createdAt}</span>
               </div>
-              <Viewer initialValue={content} />
+              <Viewer initialValue={content} plugins={[[codeSyntaxHighlight, { highlighter: Prism }]]} />
             </PostContainer>
           </>
         )}

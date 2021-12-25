@@ -211,7 +211,8 @@ const AdminPostWritePage = () => {
     }
 
     try {
-      const content = editorRef.current.getInstance().getHTML()
+      // const content = editorRef.current.getInstance().getHTML()
+      const content = editorRef.current.getInstance().getMarkdown()
       const id = params.id
       await setPost(title, category, tagList, thumbnail, description, content, createdAt, id)
       SuccessMessageOpen('포스트 작성에 성공했습니다')
