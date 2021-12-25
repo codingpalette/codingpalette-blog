@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 
 export const PostContainer = styled.div`
-  width: 768px;
+  max-width: 768px;
+  width: 100%;
   padding-top: 2.5rem;
   margin-left: auto;
   margin-right: auto;
