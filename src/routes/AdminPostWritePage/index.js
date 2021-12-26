@@ -10,7 +10,6 @@ import Select from '../../components/Select'
 
 import { ErrorMessageOpen, SuccessMessageOpen } from '../../hooks/toast'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getPost, setPost } from '../../models/post'
 
 // toast-editor
 import '@toast-ui/editor/dist/toastui-editor.css'
@@ -26,11 +25,14 @@ import 'tui-color-picker/dist/tui-color-picker.css'
 import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css'
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax'
 
-import { setImage } from '../../models/image'
 import { fileData, resizeImage } from '../../hooks/imageResize'
 
 import { useRecoilValue } from 'recoil'
 import authState from '../../store/authState'
+import { getPost, setPost } from '../../models/post'
+import { setImage } from '../../models/image'
+import { getSave, setSave } from '../../models/saves'
+import useQuery from '../../hooks/useQuery'
 
 const OPTIONS = [
   { id: 1, value: '', name: '' },
@@ -41,6 +43,7 @@ const OPTIONS = [
 const AdminPostWritePage = () => {
   let navigate = useNavigate()
   let params = useParams()
+  let query = useQuery()
   const userData = useRecoilValue(authState)
   const [title, onChangeTitle, setTitle] = useInput('')
   const [category, setCategory] = useState('')
@@ -56,16 +59,26 @@ const AdminPostWritePage = () => {
   const inputRef = useRef(null)
 
   useEffect(() => {
+    // 포스트 수정
     if (params.id) {
-      getPostEvent()
+      getPostEvent('post')
+    } else if (query.get('saves')) {
+      // 임시저장 불러오기
+      getPostEvent('saves')
     } else {
       setPageLoading(true)
     }
   }, [])
 
-  const getPostEvent = async () => {
+  // 포스트 불러오기
+  const getPostEvent = async type => {
     try {
-      const res = await getPost(params.id)
+      let res
+      if (type === 'post') {
+        res = await getPost(params.id)
+      } else {
+        res = await getSave(query.get('saves'))
+      }
       setTitle(res.title)
       setCategory(res.category)
       setInitialValue(res.content)
@@ -103,6 +116,7 @@ const AdminPostWritePage = () => {
     setIsActive(false)
   }
 
+  // 이미지 업로드
   const uploadImage = async (blob, callback) => {
     const file = []
     file.push(blob)
@@ -189,6 +203,22 @@ const AdminPostWritePage = () => {
     }
   }, [])
 
+  // 임시 저장
+  const onClickSaves = async () => {
+    try {
+      // const content = editorRef.current.getInstance().getHTML()
+      const content = editorRef.current.getInstance().getMarkdown()
+      const id = query.get('saves')
+      const res = await setSave(title, category, tagList, thumbnail, description, content, createdAt, id)
+      // console.log(res)
+      SuccessMessageOpen('포스트가 임시저장 되었습니다')
+      navigate(`/admin/write?saves=${res.id}`)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  // 포스트 저장
   const onClickSubmit = async () => {
     if (title.trim().length === 0) {
       ErrorMessageOpen('제목을 입력해 주세요')
@@ -278,6 +308,9 @@ const AdminPostWritePage = () => {
               <ButtonBox>
                 <Button theme="tertiary" onClick={() => navigate('/admin/post')}>
                   취소
+                </Button>
+                <Button theme="tertiary" onClick={onClickSaves}>
+                  임시저장
                 </Button>
                 <Button onClick={onClickModalOpen}>작성하기</Button>
               </ButtonBox>
