@@ -34,6 +34,9 @@ export const TagGroup = styled.div`
 
 export const EditorBox = styled.div`
   margin-top: 1rem;
+  & * {
+    line-height: 1.6;
+  }
 `
 
 export const ButtonBox = styled.div`
