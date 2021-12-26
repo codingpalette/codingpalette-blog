@@ -18,5 +18,10 @@ service cloud.firestore {
         allow read : if true;
         allow write : if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.level == 0;
     }
+
+    match /saves/{document=**}{
+        allow read : if true;
+        allow write : if get(/databases/$(database)/documents/users/$(request.auth.uid)).data.level == 0;
+    }
   }
 }
