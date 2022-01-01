@@ -23,4 +23,8 @@ export const PostContainer = styled.div`
     text-align: center;
     margin-bottom: 2rem;
   }
+
+  .tag_list {
+    margin-bottom: 2rem;
+  }
 `

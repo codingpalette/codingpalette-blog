@@ -11,6 +11,7 @@ import {
   limit,
   orderBy,
   deleteDoc,
+  where,
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import { converter as contentConverter } from './content'
@@ -60,4 +61,14 @@ export const getSave = async id => {
   const contentSnapshot = await getDoc(contentRef)
   post.content = contentSnapshot.data().content
   return post
+}
+
+export const getSaves = async () => {
+  const ref = collection(db, 'saves')
+  // const q = query(collection(db, 'saves'), orderBy('createdAt', 'desc'), limit(4))
+  const q = query(ref, where('category', '==', 'css'), orderBy('createdAt', 'desc'))
+  const sn = await getDocs(q)
+
+  return sn.docs.map(e => e.data())
+  // return listData
 }

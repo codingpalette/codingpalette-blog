@@ -11,6 +11,7 @@ import {
   limit,
   orderBy,
   deleteDoc,
+  where,
 } from 'firebase/firestore'
 import { db } from '../firebase'
 import { Content, converter as contentConverter, getContents } from './content'
@@ -131,4 +132,13 @@ export const delPost = async id => {
   batch.delete(contentRef)
   await batch.commit()
   return true
+}
+
+export const getTags = async id => {
+  const ref = collection(db, 'posts')
+  // const q = query(collection(db, 'saves'), orderBy('createdAt', 'desc'), limit(4))
+  const q = query(ref, where('category', '==', id), orderBy('createdAt', 'desc'))
+  const sn = await getDocs(q)
+
+  return sn.docs.map(e => e.data())
 }
