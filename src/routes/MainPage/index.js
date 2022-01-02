@@ -6,6 +6,7 @@ import { postState } from '../../store/postState'
 import { getPosts } from '../../models/post'
 import CardContainer from '../../containers/CardContainer'
 import PostCard from '../../components/PostCard'
+import Footer from '../../components/Footer'
 
 const MainPage = () => {
   const [postList, setPostList] = useRecoilState(postState)
@@ -38,6 +39,7 @@ const MainPage = () => {
           </>
         )}
       </MainContainer>
+      <Footer />
     </>
   )
 }

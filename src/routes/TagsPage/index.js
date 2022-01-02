@@ -7,6 +7,7 @@ import { getTags } from '../../models/post'
 import dayjs from 'dayjs'
 import CardContainer from '../../containers/CardContainer'
 import PostCard from '../../components/PostCard'
+import Footer from '../../components/Footer'
 
 const TagsPage = () => {
   let params = useParams()
@@ -42,6 +43,7 @@ const TagsPage = () => {
           </>
         )}
       </MainContainer>
+      <Footer />
     </>
   )
 }

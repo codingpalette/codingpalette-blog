@@ -14,6 +14,7 @@ import Prism from 'prismjs'
 import 'prismjs/themes/prism.css'
 import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css'
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight'
+import Footer from '../../components/Footer'
 
 const PostPage = () => {
   let params = useParams()
@@ -65,6 +66,7 @@ const PostPage = () => {
           </>
         )}
       </MainContainer>
+      <Footer />
     </>
   )
 }
