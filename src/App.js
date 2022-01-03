@@ -57,6 +57,7 @@ function App() {
             <Route path=":id" element={<AdminPostWritePage />} />
           </Route>
         </Route>
+        <Route path="*" element={<MainPage />} />
       </Routes>
       <ToastContainer />
     </>
