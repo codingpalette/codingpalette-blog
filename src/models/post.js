@@ -106,7 +106,7 @@ export const setPost = async (title, category, tagList, thumbnail, description, 
 
 export const getPosts = async () => {
   const ref = collection(db, 'posts').withConverter(converter)
-  const q = query(ref, orderBy('createdAt', 'desc'), limit(4))
+  const q = query(ref, orderBy('createdAt', 'desc'), limit(10))
   const sn = await getDocs(q)
 
   return sn.docs.map(e => e.data().data)
