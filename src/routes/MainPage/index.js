@@ -7,6 +7,7 @@ import { getPosts } from '../../models/post'
 import CardContainer from '../../containers/CardContainer'
 import PostCard from '../../components/PostCard'
 import Footer from '../../components/Footer'
+import { Helmet } from 'react-helmet'
 
 const MainPage = () => {
   const [postList, setPostList] = useRecoilState(postState)
@@ -27,6 +28,12 @@ const MainPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>CodingPalette</title>
+        <meta property="og:title" content="CodingPalette" />
+        <meta name="description" content="좋은 개발자가 되기 위해 노력하고 있는 블로그 입니다." />
+        <meta property="og:description" content="좋은 개발자가 되기 위해 노력하고 있는 블로그 입니다." />
+      </Helmet>
       <Header />
       <MainContainer>
         {postList && postList.length > 0 && (

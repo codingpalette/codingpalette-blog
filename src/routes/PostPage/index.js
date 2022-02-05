@@ -8,6 +8,7 @@ import '@toast-ui/editor/dist/toastui-editor.css'
 import { Viewer } from '@toast-ui/react-editor'
 import { PostContainer } from './styles'
 import dayjs from 'dayjs'
+import { Helmet } from 'react-helmet'
 
 // plugin
 import Prism from 'prismjs'
@@ -20,6 +21,7 @@ const PostPage = () => {
   let params = useParams()
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const [createdAt, setCreatedAt] = useState('')
   const [tagList, setTagList] = useState(null)
   const [content, setContent] = useState('')
@@ -32,8 +34,9 @@ const PostPage = () => {
   const getPostEvent = async () => {
     try {
       const res = await getPost(params.id)
-      // console.log(res)
+      console.log(res)
       setTitle(res.title)
+      setDescription(res.description)
       setCreatedAt(dayjs(res.createdAt.seconds * 1000).format('YYYY년 MM월 DD일'))
       setTagList(res.tagList)
       setContent(res.content)
@@ -44,6 +47,12 @@ const PostPage = () => {
   }
   return (
     <>
+      <Helmet>
+        <title>{title}</title>
+        <meta property="og:title" content={title} />
+        <meta name="description" content={description} />
+        <meta property="og:description" content={description} />
+      </Helmet>
       <Header />
       <MainContainer bgColor="white">
         {pageLoading && (
