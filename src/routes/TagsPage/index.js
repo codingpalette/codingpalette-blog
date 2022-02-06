@@ -8,6 +8,7 @@ import dayjs from 'dayjs'
 import CardContainer from '../../containers/CardContainer'
 import PostCard from '../../components/PostCard'
 import Footer from '../../components/Footer'
+import { Helmet } from 'react-helmet'
 
 const TagsPage = () => {
   let params = useParams()
@@ -28,6 +29,12 @@ const TagsPage = () => {
   }
   return (
     <>
+      <Helmet>
+        <title>#{params.id}</title>
+        <meta property="og:title" content={`#${params.id}`} />
+        <meta name="description" content="좋은 개발자가 되기 위해 노력하고 있는 블로그 입니다." />
+        <meta property="og:description" content="좋은 개발자가 되기 위해 노력하고 있는 블로그 입니다." />
+      </Helmet>
       <Header />
       <MainContainer>
         <TitleBox>
