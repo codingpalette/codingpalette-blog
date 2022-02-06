@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { lazy, Suspense, useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import MainPage from './routes/MainPage'
-import LoginPage from './routes/LoginPage'
 import JoinPage from './routes/JoinPage'
-import AboutPage from './routes/AboutPage'
 import PostPage from './routes/PostPage'
 import TagsPage from './routes/TagsPage'
-import AdminPage from './routes/AdminPage'
-import AdminPostPage from './routes/AdminPostPage'
-import AdminPostWritePage from './routes/AdminPostWritePage'
+
+const LoginPage = lazy(() => import('./routes/LoginPage'))
+const AboutPage = lazy(() => import('./routes/AboutPage'))
+const AdminPage = lazy(() => import('./routes/AdminPage'))
+const AdminPostPage = lazy(() => import('./routes/AdminPostPage'))
+const AdminPostWritePage = lazy(() => import('./routes/AdminPostWritePage'))
 
 import { auth } from './firebase'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -43,22 +44,24 @@ function App() {
   }
   return (
     <>
-      <Routes>
-        <Route index path="/" element={<MainPage />} />
-        <Route path="/cp_login" element={<LoginPage />} />
-        {/*<Route path="/join" element={<JoinPage />} />*/}
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/post/:id" element={<PostPage />} />
-        <Route path="/tags/:id" element={<TagsPage />} />
-        <Route path="/admin">
-          <Route index element={<AdminPage />} />
-          <Route path="post" element={<AdminPostPage />} />
-          <Route path="write" element={<AdminPostWritePage />}>
-            <Route path=":id" element={<AdminPostWritePage />} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route index path="/" element={<MainPage />} />
+          <Route path="/cp_login" element={<LoginPage />} />
+          {/*<Route path="/join" element={<JoinPage />} />*/}
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/tags/:id" element={<TagsPage />} />
+          <Route path="/admin">
+            <Route index element={<AdminPage />} />
+            <Route path="post" element={<AdminPostPage />} />
+            <Route path="write" element={<AdminPostWritePage />}>
+              <Route path=":id" element={<AdminPostWritePage />} />
+            </Route>
           </Route>
-        </Route>
-        <Route path="*" element={<MainPage />} />
-      </Routes>
+          <Route path="*" element={<MainPage />} />
+        </Routes>
+      </Suspense>
       <ToastContainer />
     </>
   )
