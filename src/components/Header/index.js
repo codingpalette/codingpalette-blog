@@ -29,6 +29,8 @@ const Header = () => {
         {/*  <span className="bar bar3" />*/}
         {/*</div>*/}
         <div className={`${isActive ? 'active' : ''} nav_box`}>
+          <Link to="/">Home</Link>
+          <Link to="/">About</Link>
           {/*<NavLink to="/">Home</NavLink>*/}
           {/*<NavLink to="/about">About</NavLink>*/}
           {/*{!userData ? (*/}
